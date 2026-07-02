@@ -1,0 +1,6 @@
+services:
+  autoflip:
+    build: .
+    image: autoflip
+    volumes:
+      - ./videos:/work
