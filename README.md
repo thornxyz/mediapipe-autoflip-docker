@@ -7,10 +7,18 @@ This repo builds MediaPipe AutoFlip from source, packages the binary into a smal
 ## Requirements
 
 - Docker
-- Docker Compose
+- Docker Compose (optional)
 - Enough disk space and time for a MediaPipe/Bazel build
 
 ## Build
+
+Using Docker directly:
+
+```sh
+docker build -t autoflip .
+```
+
+Or with Docker Compose:
 
 ```sh
 docker compose build
@@ -21,6 +29,14 @@ The first build downloads Bazel and MediaPipe, then compiles AutoFlip. It can ta
 ## Usage
 
 Put videos in `./videos`, then run:
+
+Using Docker directly:
+
+```sh
+docker run --rm -v "$PWD/videos:/work" autoflip input.mp4 output_9x16.mp4 9:16
+```
+
+Or with Docker Compose:
 
 ```sh
 docker compose run --rm autoflip input.mp4 output_9x16.mp4 9:16
@@ -39,12 +55,6 @@ Because `./videos` is mounted to `/work`, use filenames relative to the `videos`
 ```sh
 docker compose run --rm autoflip vid1.mp4 vid1_9x16.mp4 9:16
 docker compose run --rm autoflip vid3.webm vid3_16x9.mp4 16:9
-```
-
-You can also run the image directly:
-
-```sh
-docker run --rm -v "$PWD/videos:/work" autoflip input.mp4 output.mp4 9:16
 ```
 
 ## What It Does
